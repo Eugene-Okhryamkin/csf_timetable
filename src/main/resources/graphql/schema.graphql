@@ -1,0 +1,74 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Query {
+    getTimetable(year: Int): TimeTable!,
+    getAllGroups: [Group]!,
+    getAllGroupsByYear(year: Int): [Group]!,
+    getAllSubjectsByGroupAndYear(year: Int, group: String): [Subject]!,
+    getAllTeachers: [Teacher]!,
+    getGroupById(id: Int): Group!,
+    getSubjectById(id: Int): Subject!,
+    getTeacherById(id: Int): Teacher!
+}
+
+type Mutation {
+    saveTeacher(name: String!,
+        surname: String!,
+        middlename: String!,
+        email: String!,
+        password: String!,
+        vkLink: String,
+        tgLink: String,
+        isAdmin: Boolean!
+    ): Teacher!,
+    saveGroup(
+        course: Int!,
+        groupName: Float!,
+        directionName: String!
+    ): Group!,
+    saveSubject(
+        subjectName: String!,
+        teacherId: ID!,
+        group_id: ID!
+    ): Subject!,
+    deleteGroup(id: Int!): Group!
+}
+
+type Group {
+    id: ID!,
+    course: Int!,
+    groupName: Float!,
+    directionName: String!
+}
+
+
+type Subject {
+    id: ID!,
+    subjectName: String!
+    teacher: Teacher!
+    group: Group!
+}
+
+type Teacher {
+    id: ID!,
+    name: String!,
+    surname: String!,
+    middlename: String!,
+    email: String!,
+    password: String!,
+    vkLink: String,
+    tgLink: String,
+    isAdmin: Boolean!
+}
+
+type TimeTable {
+    id: ID!,
+    year: Int,
+    course: Int,
+    semester: Int,
+    week: Int,
+}
+
