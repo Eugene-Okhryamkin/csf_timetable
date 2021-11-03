@@ -4,26 +4,26 @@ import org.eclipse.microprofile.graphql.GraphQLApi;
 import org.eclipse.microprofile.graphql.Mutation;
 import org.eclipse.microprofile.graphql.Query;
 import ru.vsu.cs.timetable.models.Timetable;
-import ru.vsu.cs.timetable.services.GroupService.GroupService;
-import ru.vsu.cs.timetable.services.TimetableService.TimetableService;
+import ru.vsu.cs.timetable.services.GroupService;
+import ru.vsu.cs.timetable.services.TimetableService;
 
-import javax.inject.Inject;
 import java.util.List;
 
 @GraphQLApi
 public class TimetableController {
 
-    @Inject
     private TimetableService timetableService;
 
-    @Inject
-    private GroupService groupService;
+    public TimetableController(TimetableService timetableService) {
+        this.timetableService = timetableService;
+    }
 
     @Query
     public Timetable getTimetableById(Long id) {
         return this.timetableService.getTimetableById(id);
     }
 
+    @Query
     public Timetable getTimetableByYear(int year) {
         return this.timetableService.getTimetableByYear(year);
     }

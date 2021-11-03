@@ -4,16 +4,18 @@ import org.eclipse.microprofile.graphql.GraphQLApi;
 import org.eclipse.microprofile.graphql.Mutation;
 import org.eclipse.microprofile.graphql.Query;
 import ru.vsu.cs.timetable.models.Teacher;
-import ru.vsu.cs.timetable.services.TeacherService.TeacherService;
+import ru.vsu.cs.timetable.services.TeacherService;
 
-import javax.inject.Inject;
 import java.util.List;
 
 @GraphQLApi
 public class TeacherController {
 
-    @Inject
     private TeacherService teacherService;
+
+    public TeacherController(TeacherService teacherService) {
+        this.teacherService = teacherService;
+    }
 
     @Query
     public Teacher getTeacher(Long id) {

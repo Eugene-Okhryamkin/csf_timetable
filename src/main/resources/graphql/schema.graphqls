@@ -30,9 +30,7 @@ type Mutation {
         directionName: String!
     ): Group!,
     saveSubject(
-        subjectName: String!,
-        teacherId: ID!,
-        group_id: ID!
+        subjectName: String!
     ): Subject!,
     deleteGroup(id: Int!): Group!
 }
@@ -61,7 +59,7 @@ type Teacher {
     password: String!,
     vkLink: String,
     tgLink: String,
-    isAdmin: Boolean!
+    isAdmin: Boolean
 }
 
 type TimeTable {

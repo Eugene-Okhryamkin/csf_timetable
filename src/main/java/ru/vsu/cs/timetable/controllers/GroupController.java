@@ -1,21 +1,21 @@
 package ru.vsu.cs.timetable.controllers;
 
-import io.smallrye.mutiny.Uni;
 import org.eclipse.microprofile.graphql.GraphQLApi;
 import org.eclipse.microprofile.graphql.Mutation;
 import org.eclipse.microprofile.graphql.Query;
 import ru.vsu.cs.timetable.models.Group;
-import ru.vsu.cs.timetable.services.GroupService.GroupService;
+import ru.vsu.cs.timetable.services.GroupService;
 
-import javax.inject.Inject;
-import javax.validation.Valid;
 import java.util.List;
 
 @GraphQLApi
 public class GroupController {
 
-    @Inject
     private GroupService groupService;
+
+    public GroupController(GroupService groupService) {
+        this.groupService = groupService;
+    }
 
     @Query
     public List<Group> getAllGroups() {

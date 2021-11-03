@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "timetable")
@@ -15,16 +16,17 @@ public class Timetable extends BaseModel {
     @Column(name = "year")
     private int year;
 
-    @Column(name = "course")
-    private int course;
-
     @Column(name = "semester")
     private int semester;
 
     @Column(name = "week")
     private int week;
 
-    @ManyToOne
-    @JoinColumn(name = "subject_id")
-    private Subject subject;
+    @Column(name = "course")
+    private int course;
+
+    @OneToMany
+    @JoinColumn(name = "timetableItems")
+    private List<TimetableItem> timetableItems;
+
 }

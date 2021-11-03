@@ -1,4 +1,4 @@
-package ru.vsu.cs.timetable.services.SubjectService;
+package ru.vsu.cs.timetable.services;
 
 import ru.vsu.cs.timetable.models.Subject;
 import ru.vsu.cs.timetable.repositories.SubjectRepository;
@@ -10,22 +10,22 @@ import java.util.List;
 
 @ApplicationScoped
 @Transactional
-public class SubjectService implements ISubjectService {
+public class SubjectService {
 
-    @Inject
     private SubjectRepository subjectRepository;
 
-    @Override
+    public SubjectService(SubjectRepository subjectRepository) {
+        this.subjectRepository = subjectRepository;
+    }
+
     public Subject getSubjectById(Long id) {
         return this.subjectRepository.findById(id);
     }
 
-    @Override
     public List<Subject> getAllSubjects() {
         return this.subjectRepository.listAll();
     }
 
-    @Override
     public Subject deleteSubjectById(Long id) {
         Subject subject = this.subjectRepository.findById(id);
         this.subjectRepository.deleteById(id);
@@ -33,7 +33,6 @@ public class SubjectService implements ISubjectService {
         return subject;
     }
 
-    @Override
     public void saveSubject(Subject subject) {
         this.subjectRepository.persist(subject);
     }

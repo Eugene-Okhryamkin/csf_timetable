@@ -16,7 +16,6 @@ import javax.persistence.Table;
 @Setter
 @ToString
 public class Group extends BaseModel {
-
     @Column(name = "course")
     private int course;
 

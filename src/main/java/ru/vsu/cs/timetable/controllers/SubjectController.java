@@ -4,16 +4,18 @@ import org.eclipse.microprofile.graphql.GraphQLApi;
 import org.eclipse.microprofile.graphql.Mutation;
 import org.eclipse.microprofile.graphql.Query;
 import ru.vsu.cs.timetable.models.Subject;
-import ru.vsu.cs.timetable.services.SubjectService.SubjectService;
+import ru.vsu.cs.timetable.services.SubjectService;
 
-import javax.inject.Inject;
 import java.util.List;
 
 @GraphQLApi
 public class SubjectController {
 
-    @Inject
     private SubjectService subjectService;
+
+    public SubjectController(SubjectService subjectService) {
+        this.subjectService = subjectService;
+    }
 
     @Query
     public Subject getSubjectById(Long id) {

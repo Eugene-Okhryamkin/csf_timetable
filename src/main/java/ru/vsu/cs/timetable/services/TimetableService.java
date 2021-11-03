@@ -1,43 +1,40 @@
-package ru.vsu.cs.timetable.services.TimetableService;
+package ru.vsu.cs.timetable.services;
 
+import ru.vsu.cs.timetable.models.Group;
 import ru.vsu.cs.timetable.models.Subject;
 import ru.vsu.cs.timetable.models.Timetable;
+import ru.vsu.cs.timetable.repositories.GroupRepository;
 import ru.vsu.cs.timetable.repositories.SubjectRepository;
 import ru.vsu.cs.timetable.repositories.TimetableRepository;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.transaction.Transactional;
+import javax.ws.rs.NotFoundException;
 import java.util.List;
 
 
 @ApplicationScoped
 @Transactional
-public class TimetableService implements ITimetableService {
+public class TimetableService {
 
-    @Inject
     private TimetableRepository timetableRepository;
 
-    @Inject
-    private SubjectRepository subjectRepository;
+    public TimetableService(TimetableRepository timetableRepository) {
+        this.timetableRepository = timetableRepository;
+    }
 
-
-    @Override
     public Timetable getTimetableById(Long id) {
         return this.timetableRepository.findById(id);
     }
 
-    @Override
     public List<Timetable> getTimetables() {
         return this.timetableRepository.listAll();
     }
 
-    @Override
     public void saveTimetable(Timetable timetable) {
         this.timetableRepository.persist(timetable);
     }
 
-    @Override
     public Timetable getTimetableByYear(int year) {
         return null;
     }
@@ -46,7 +43,6 @@ public class TimetableService implements ITimetableService {
 //        this.subjectRepository.
 //    }
 
-    @Override
     public Timetable deleteTimetableById(Long id) {
         Timetable timetable = this.timetableRepository.findById(id);
         this.timetableRepository.deleteById(id);
