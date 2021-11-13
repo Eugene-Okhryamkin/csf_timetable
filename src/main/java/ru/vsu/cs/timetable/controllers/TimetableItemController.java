@@ -35,6 +35,11 @@ public class TimetableItemController {
     }
 
     @Mutation
+    public TimetableItem updateTimetableItem(Long id, TimetableItem timetableItem) {
+        return this.timetableItemService.updateTimetableItem(id, timetableItem);
+    }
+
+    @Mutation
     public TimetableItem deleteTimetableItem(Long timetableItemId) {
         return this.timetableItemService.deleteTimetableItem(timetableItemId);
     }

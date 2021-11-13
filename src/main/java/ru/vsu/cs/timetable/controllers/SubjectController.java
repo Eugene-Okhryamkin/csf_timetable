@@ -29,10 +29,11 @@ public class SubjectController {
 
     @Mutation
     public Subject saveSubject(Subject subject) {
-        this.subjectService.saveSubject(subject);
+        this.subjectService.saveOrUpdateSubject(subject);
 
         return subject;
     }
+
 
     @Mutation
     public Subject deleteSubject(Long id) {

@@ -4,9 +4,9 @@ import org.eclipse.microprofile.graphql.GraphQLApi;
 import org.eclipse.microprofile.graphql.Mutation;
 import org.eclipse.microprofile.graphql.Query;
 import ru.vsu.cs.timetable.models.Timetable;
-import ru.vsu.cs.timetable.services.GroupService;
 import ru.vsu.cs.timetable.services.TimetableService;
 
+import java.sql.Time;
 import java.util.List;
 
 @GraphQLApi
@@ -24,8 +24,8 @@ public class TimetableController {
     }
 
     @Query
-    public Timetable getTimetableByYear(int year) {
-        return this.timetableService.getTimetableByYear(year);
+    public Timetable getTimetable(int year, int course, int week, int group) {
+        return this.timetableService.getTimetable(year, course, week, group);
     }
 
     @Query
@@ -35,10 +35,11 @@ public class TimetableController {
 
     @Mutation
     public Timetable saveTimetable(Timetable timetable) {
-        this.timetableService.saveTimetable(timetable);
+        this.timetableService.saveOrUpdateTimetable(timetable);
 
         return timetable;
     }
+
 
     @Mutation
     public Timetable deleteTimetable(Long id) {

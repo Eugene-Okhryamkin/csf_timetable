@@ -1,11 +1,13 @@
 package ru.vsu.cs.timetable.services;
 
+import ru.vsu.cs.timetable.models.Group;
 import ru.vsu.cs.timetable.models.Subject;
 import ru.vsu.cs.timetable.repositories.SubjectRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import javax.ws.rs.NotFoundException;
 import java.util.List;
 
 @ApplicationScoped
@@ -33,7 +35,12 @@ public class SubjectService {
         return subject;
     }
 
-    public void saveSubject(Subject subject) {
-        this.subjectRepository.persist(subject);
+    public void saveOrUpdateSubject(Subject subject) {
+        if(subject.getId() == null) {
+            this.subjectRepository.persist(subject);
+        } else {
+            this.subjectRepository.updateSubject(subject);
+        }
     }
+
 }

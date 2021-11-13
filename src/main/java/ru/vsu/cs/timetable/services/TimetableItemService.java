@@ -5,6 +5,7 @@ import ru.vsu.cs.timetable.repositories.TimetableItemRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
+import javax.ws.rs.NotFoundException;
 import java.util.List;
 
 @ApplicationScoped
@@ -27,6 +28,18 @@ public class TimetableItemService {
 
     public void saveTimetableItem(TimetableItem timetableItem) {
         this.timetableItemRepository.persist(timetableItem);
+    }
+
+    public TimetableItem updateTimetableItem(Long id, TimetableItem timetableItem) {
+        TimetableItem entity = this.timetableItemRepository.findById(id);
+
+        if(entity == null) {
+            throw new NotFoundException();
+        }
+
+        entity = timetableItem;
+
+        return entity;
     }
 
     public TimetableItem deleteTimetableItem(Long timetableItemId) {

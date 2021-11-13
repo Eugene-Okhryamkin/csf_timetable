@@ -11,4 +11,7 @@ public class GroupRepository implements PanacheRepository<Group> {
     public List<Group> findAllGroupsByYear(int year) {
         return list("year", year);
     }
+    public Group updateGroup(Group group) {
+        return this.getEntityManager().merge(group);
+    }
 }

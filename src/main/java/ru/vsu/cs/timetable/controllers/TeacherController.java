@@ -29,7 +29,7 @@ public class TeacherController {
 
     @Mutation
     public Teacher saveTeacher(Teacher teacher) {
-        this.teacherService.saveTeacher(teacher);
+        this.teacherService.saveOrUpdateTeacher(teacher);
 
         return teacher;
     }

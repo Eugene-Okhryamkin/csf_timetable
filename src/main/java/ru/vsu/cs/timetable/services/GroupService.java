@@ -6,6 +6,7 @@ import ru.vsu.cs.timetable.repositories.GroupRepository;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import javax.ws.rs.NotFoundException;
 import java.util.List;
 
 @ApplicationScoped
@@ -30,9 +31,14 @@ public class GroupService {
         return this.groupRepository.listAll();
     }
 
-    public void saveGroup(Group group) {
-        this.groupRepository.persist(group);
+    public void saveGroupOrUpdate(Group group) {
+        if(group.getId() == null) {
+            this.groupRepository.persist(group);
+        } else {
+            this.groupRepository.updateGroup(group);
+        }
     }
+
 
     public Group deleteGroupById(Long id) {
         Group group = this.groupRepository.findById(id);

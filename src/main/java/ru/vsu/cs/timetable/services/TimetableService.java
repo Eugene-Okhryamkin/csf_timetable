@@ -31,17 +31,18 @@ public class TimetableService {
         return this.timetableRepository.listAll();
     }
 
-    public void saveTimetable(Timetable timetable) {
-        this.timetableRepository.persist(timetable);
+    public void saveOrUpdateTimetable(Timetable timetable) {
+        if(timetable.getId() == null) {
+            this.timetableRepository.persist(timetable);
+        } else {
+            this.timetableRepository.updateTimetable(timetable);
+        }
     }
 
-    public Timetable getTimetableByYear(int year) {
-        return null;
-    }
 
-//    public List<Subject> getSubjectByTimetable(Long timetableId) {
-//        this.subjectRepository.
-//    }
+    public Timetable getTimetable(int year, int course, int week, int group) {
+        return this.timetableRepository.findByParams(year, course, week, group);
+    }
 
     public Timetable deleteTimetableById(Long id) {
         Timetable timetable = this.timetableRepository.findById(id);

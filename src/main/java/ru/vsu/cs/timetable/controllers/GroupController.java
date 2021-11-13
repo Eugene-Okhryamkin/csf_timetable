@@ -29,9 +29,10 @@ public class GroupController {
 
     @Mutation
     public Group saveGroup(Group group) {
-        this.groupService.saveGroup(group);
+        this.groupService.saveGroupOrUpdate(group);
         return group;
     }
+
 
     @Mutation
     public Group deleteGroup(Long id) {

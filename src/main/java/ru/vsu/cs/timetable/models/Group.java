@@ -19,6 +19,7 @@ public class Group extends BaseModel {
     @Column(name = "course")
     private int course;
 
+
     @Column(name = "groupname")
     private float groupName;
 
